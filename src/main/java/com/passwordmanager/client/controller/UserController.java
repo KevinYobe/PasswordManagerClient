@@ -3,6 +3,8 @@ package com.passwordmanager.client.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -47,6 +49,26 @@ public class UserController {
 		return mav;
 	}
 	
+	@GetMapping("/account")
+	public ModelAndView showAccount(HttpServletRequest request) {
+		uri = UriComponentsBuilder.fromUriString(userUrl).path("/finduserbyusername/{username}").build(request.getUserPrincipal().getName());
+		User user = userRestClient.get(uri);
+		System.out.println(user.getFirstName());
+		mav.addObject("user",user);
+		mav.setViewName("user/profile");
+		return mav;
+	}
+	
+	@PostMapping("/account")
+	public ModelAndView updateUser(User user) {
+		uri = UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();
+		User updatedUser = userRestClient.post(uri, user);
+		mav.addObject("user",updatedUser);
+		mav.setViewName("user/profile");
+		return mav;
+	}
+	
+	
 	@GetMapping("/adduser")
 	public ModelAndView addUser(){
 		mav.setViewName("/user/createuser");
@@ -65,7 +87,7 @@ public class UserController {
 	@GetMapping("/removeuser/{id}")
 	public ModelAndView removeUser(@PathVariable Long id) {
 		uri = UriComponentsBuilder.fromUriString(userUrl).path("/removeuser/{id}").build(id);
-		User user = userRestClient.get(uri);
+		userRestClient.get(uri);
 		mav.setViewName("redirect:/showuser");
 		return mav;
 	}
@@ -75,5 +97,6 @@ public class UserController {
 	public User getUser() {
 		return new User();
 	}
+	
 
 }

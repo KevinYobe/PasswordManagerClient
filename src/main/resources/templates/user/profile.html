@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="dashboard/head :: head" />
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div th:replace="dashboard/navbar :: header" /></div>
+			<div th:replace="dashboard/sidebar :: aside" /></div>
+			<main
+				class="col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-center">
+				<div class="container">
+					<div class="row gutters">
+						<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+							<div class="card h-100">
+								<div class="card-body">
+									<div class="account-settings">
+										<div class="user-profile">
+											<div class="user-avatar">
+												<img
+													src="https://bootdey.com/img/Content/avatar/avatar7.png"
+													alt="${user.firstName}">
+											</div>
+											<h5 class="user-name">
+												<span th:text=${user.firstName}>First Name</span>
+											</h5>
+											<h6 class="user-email">
+												<span th:text=${user.surname}>Surname</span>
+											</h6>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+							<div class="card h-100">
+								<div class="card-body">
+								<form action="row g-3" th:object="${user}"
+									th:action="@{/account}" method="post">
+									<fieldset disabled id = "fieldSet">
+										<div class="row gutters">
+											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+												<h6 class="mb-2 text-primary">Personal Details</h6>
+											</div>
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label for="name">Name</label> <input type="text"
+														class="form-control" id="name"
+														th:placeholder="${user.firstName}">
+												</div>
+											</div>
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label for="surname">Surname</label> <input type="text"
+														class="form-control" id="surname"
+														th:placeholder="${user.surname}">
+												</div>
+											</div>
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label for="email">Email</label> <input type="email"
+														class="form-control" id="email"
+														th:placeholder="${user.email}">
+												</div>
+											</div>
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label for="phone">Phone</label> <input type="text"
+														class="form-control" id="phone" placeholder="0774116711">
+												</div>
+											</div>
+										</div>
+									</fieldset>
+									<div class="row gutters">
+											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+												<div class="text-right">
+													<button type="button" id="submit" name="submit"
+														class="btn btn-secondary">Cancel</button>
+													<button type="submit" id="submit" name="submit"
+														class="btn btn-primary">Update</button>
+													<label class="switch"> <input type="checkbox" onclick="enableEdit()" id = "checkbox">
+														<span class="slider round"></span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</form>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</main>
+		</div>
+	</div>
+
+	<script>
+	document.getElementById('checkbox').onchange = function() {
+	    document.getElementById('fieldSet').disabled = !this.checked;
+	};
+	</script>
+
+</body>
+</html>
