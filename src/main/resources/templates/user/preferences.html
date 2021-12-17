@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="dashboard/head :: head" />
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div th:replace="dashboard/navbar :: header" /></div>
+			<div th:replace="dashboard/sidebar :: aside" /></div>
+			<main
+				class="col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-center"
+				style="padding-top: 1em;">
+				<h5>View Passwords</h5>
+				<form action="row g-3">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Resource</th>
+								<th scope="col">URL</th>
+								<th scope="col">Username</th>
+								<th scope="col">Password</th>
+								<th scope="col">Created</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="password: ${passwords}">
+								<td th:text="${password.resource}" />
+								<td th:text="${password.url}" />
+								<td th:text="${password.username}" />
+								<td th:text="${password.password}" />
+								<td th:text="${password.created}" />
+							</tr>
+						</tbody>
+					</table>
+				</form>
+
+			</main>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="dashboard/head :: head" />
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div th:replace="dashboard/navbar :: header" /></div>
+			<div th:replace="dashboard/sidebar :: aside" /></div>
+			<main
+				class="col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-center form-add">
+				<div class="card shadow">
+					<div class="card-header">
+						<h4>Add User</h4>
+					</div>
+					<div class="card-body">
+						<form action="row g-3" th:object="${user}" th:action="@{/adduser}"
+							method="post">
+							<div class="col-md-6">
+								<input type="text" class="form-control is-valid"
+									id="validationServer01" th:field="*{firstName}"
+									placeholder="Name" required>
+
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control is-valid"
+									id="validationServer01" th:field="*{surname}"
+									placeholder="LastName" required>
+							</div>
+							<div class="col-md-6">
+								<input type="email" class="form-control is-valid"
+									id="validationServer01" th:field="*{email}" placeholder="Email"
+									required>
+							</div>
+
+							<div class="col-md-6">
+								<button class="btn btn-primary form-control" type="submit">Add
+									User</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+			</main>
+		</div>
+	</div>
+
+</body>
+</html>
