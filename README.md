@@ -4,6 +4,7 @@ A UI application for Password Manager service. This is a web project, written wi
 2. Add a password 
 3. Modify an exisiting password
 4. Delete a password. 
+
 Allows provision for Admin users and Super Admin. Admin users are able to: 
 1. View users
 2. Modify users. 
