@@ -57,9 +57,8 @@ public class UserController {
 	@PostMapping("/adduser")
 	public ModelAndView addUser(User user) {
 		uri =UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();	
-		System.out.println(user.getEmail()+"" + user.getFirstName() + user.getSurname());
 		userRestClient.post(uri, user);
-		mav.setViewName("user/viewusers");
+		mav.setViewName("redirect:/showuser");
 		return mav;
 	}
 
