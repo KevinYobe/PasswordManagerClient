@@ -92,6 +92,19 @@ public class UserController {
 		return mav;
 	}
 	
+	@GetMapping("/createaccount")
+	public ModelAndView createAccount() {
+		mav.setViewName("/user/createaccount");
+		return mav;
+	}
+	
+	@PostMapping("/createaccount")
+	public ModelAndView createAccount(User user) {
+		uri =UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();	
+		userRestClient.post(uri, user);
+		mav.setViewName("redirect:/login");
+		return mav;
+	}
 	
 	@ModelAttribute("user")
 	public User getUser() {
