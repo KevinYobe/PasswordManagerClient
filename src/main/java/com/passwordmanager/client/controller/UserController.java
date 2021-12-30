@@ -98,6 +98,12 @@ public class UserController {
 		return mav;
 	}
 	
+	@GetMapping("/confirmtoken/({token}")
+	public ModelAndView confirmToken(@PathVariable Long id) {
+		mav.setViewName("/user/createaccount");
+		return mav;
+	}
+	
 	@PostMapping("/createaccount")
 	public ModelAndView createAccount(User user) {
 		uri =UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();	

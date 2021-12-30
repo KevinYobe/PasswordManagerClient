@@ -21,12 +21,6 @@ public class AbstractRestClient implements RestClient{
 	@Autowired
 	protected RestTemplate restTemplate;
 	
-	@PostConstruct
-	private void init() {
-		MappingJackson2HttpMessageConverter jsonHttpMessageConverter = new MappingJackson2HttpMessageConverter();
-		restTemplate.getMessageConverters().add(jsonHttpMessageConverter);
-	}
-	
 	
 	@Override
 	public List<?> getAll(URI url) {
