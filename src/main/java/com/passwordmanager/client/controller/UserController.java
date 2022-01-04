@@ -1,6 +1,7 @@
 package com.passwordmanager.client.controller;
 
 import java.net.URI;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +16,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.passwordmanager.client.model.Notification;
+import com.passwordmanager.client.model.Roles;
+import com.passwordmanager.client.model.Token;
 import com.passwordmanager.client.model.User;
-
-import passwordmanager.client.rest.UserRestClient;
+import com.passwordmanager.client.notification.Messenger;
+import com.passwordmanager.client.rest.TokenRestClient;
+import com.passwordmanager.client.rest.UserRestClient;
+import com.passwordmanager.client.util.TokenUtil;
 
 @Controller
 public class UserController {
 
 	@Value("${user.baseurl}")
 	private String userUrl;
+	
+	@Autowired 
+	private Messenger messenger;
 
 	private ModelAndView mav = new ModelAndView();
 
 	private URI uri;
+	
+	@Autowired
+	TokenUtil tokenUtil;
 
 	@Autowired
 	private UserRestClient userRestClient;
@@ -98,16 +110,22 @@ public class UserController {
 		return mav;
 	}
 	
-	@GetMapping("/confirmtoken/({token}")
-	public ModelAndView confirmToken(@PathVariable Long id) {
-		mav.setViewName("/user/createaccount");
-		return mav;
-	}
-	
 	@PostMapping("/createaccount")
 	public ModelAndView createAccount(User user) {
 		uri =UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();	
-		userRestClient.post(uri, user);
+		User savedUser = userRestClient.post(uri, user);
+		if (savedUser!=null) {
+			Token token = createToken("USER_REGISTRATION", savedUser.getId());
+			String message = "Welcome to secure password manager. Click on the link to login.   " + "http://localhost:8080/confirmtoken/" +token.getToken();
+			Notification notification = new Notification();
+			notification.setCreated(ZonedDateTime.now());
+			notification.setDeleted(null);
+			notification.setDestination(savedUser.getEmail());
+			notification.setMessage(message);
+			notification.setUpdated(ZonedDateTime.now());
+			notification.setUserId(savedUser.getId());
+			sendConfirmationEmail(notification);
+		}
 		mav.setViewName("redirect:/login");
 		return mav;
 	}
@@ -117,5 +135,12 @@ public class UserController {
 		return new User();
 	}
 	
-
+	protected Token createToken(String type, Long userId) {
+		return tokenUtil.createToken(type, userId);
+		
+	}
+	protected void sendConfirmationEmail(Notification notification) {
+		messenger.sendNotification(notification);
+	}
+	
 }

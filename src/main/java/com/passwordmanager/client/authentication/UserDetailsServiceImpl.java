@@ -19,8 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.passwordmanager.client.model.Principal;
 import com.passwordmanager.client.model.Roles;
-
-import passwordmanager.client.rest.LoginRestClient;
+import com.passwordmanager.client.rest.LoginRestClient;
 
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {

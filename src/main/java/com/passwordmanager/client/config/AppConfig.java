@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@ComponentScan(basePackages = "passwordmanager.client.rest")
+@ComponentScan(basePackages = "com.passwordmanager.client.rest")
 @PropertySource("classpath:application.properties")
 public class AppConfig {
 

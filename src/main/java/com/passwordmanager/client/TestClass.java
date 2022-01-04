@@ -3,7 +3,7 @@ package com.passwordmanager.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import passwordmanager.client.rest.AuditRestClient;
+import com.passwordmanager.client.rest.AuditRestClient;
 
 @Component
 public class TestClass {

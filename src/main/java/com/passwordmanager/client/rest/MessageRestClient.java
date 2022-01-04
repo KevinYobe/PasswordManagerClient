@@ -1,4 +1,4 @@
-package passwordmanager.client.rest;
+package com.passwordmanager.client.rest;
 
 import java.net.URI;
 

@@ -2,7 +2,9 @@ package com.passwordmanager.client.model;
 
 import java.time.ZonedDateTime;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Notification {
 	
 

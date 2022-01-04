@@ -19,8 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.passwordmanager.client.model.Password;
-
-import passwordmanager.client.rest.PasswordRestClient;
+import com.passwordmanager.client.rest.PasswordRestClient;
 
 @Controller
 public class PasswordController extends AbstractWebController {
@@ -90,7 +89,6 @@ public class PasswordController extends AbstractWebController {
 		
 		uri = UriComponentsBuilder.fromUriString(passwordUrl).path("/getPassword/{id}").build(id);
 		Password password = passwordRestClient.get(uri);
-		System.out.println(password.getPassword());
 		mav.addObject(password);
 		mav.setViewName("password/editpassword");
 		return mav;
