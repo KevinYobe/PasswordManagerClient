@@ -2,30 +2,31 @@ package com.passwordmanager.client.model;
 
 import java.time.ZonedDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Token {
-	
-	
+
 	private Long id;
-	
 
 	private Long userId;
-	
+
 	private String token;
-	
+
 	private String type;
-	
+
 	private String status;
-	
+
 	private boolean expired;
-	
+
 	private ZonedDateTime created;
-	
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime deleted;
-	
+
 	public Token() {
-		
+
 	}
 
 	public Long getId() {
@@ -99,7 +100,5 @@ public class Token {
 	public void setDeleted(ZonedDateTime deleted) {
 		this.deleted = deleted;
 	}
-	
-	
 
 }

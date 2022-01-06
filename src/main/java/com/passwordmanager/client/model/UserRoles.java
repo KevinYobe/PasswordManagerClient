@@ -2,24 +2,26 @@ package com.passwordmanager.client.model;
 
 import java.time.ZonedDateTime;
 
+import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserRoles {
-	
+
 	private Long id;
-	
-	
+
 	private Long userId;
-	
-	
+
 	private Long roleId;
-	
-    private ZonedDateTime created;
-	
+
+	private ZonedDateTime created;
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime deleted;
-	
+
 	public UserRoles() {
 		// TODO Auto-generated constructor stub
 	}
@@ -71,7 +73,5 @@ public class UserRoles {
 	public void setDeleted(ZonedDateTime deleted) {
 		this.deleted = deleted;
 	}
-	
-	
 
 }

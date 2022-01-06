@@ -4,34 +4,34 @@ import java.time.ZonedDateTime;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Login {
-	
 
 	private Long id;
-	
-	
+
 	private Long userId;
-	
+
 	private int attempts;
-	
-	
+
 	private boolean attemptsExceeded;
-	
-	private String username; 
-	
+
+	private String username;
+
 	private String password;
-	
+
 	private ZonedDateTime created;
-	
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime lastLogin;
-	
+
 	private ZonedDateTime deleted;
-	
+
 	private boolean active;
-	
+
 	public Login() {
 		// TODO Auto-generated constructor stub
 	}
@@ -76,7 +76,6 @@ public class Login {
 		this.created = created;
 	}
 
-	
 	public ZonedDateTime getLastLogin() {
 		return lastLogin;
 	}
@@ -101,7 +100,6 @@ public class Login {
 		this.active = active;
 	}
 
-
 	public int getAttempts() {
 		return attempts;
 	}
@@ -125,7 +123,5 @@ public class Login {
 	public void setAttemptsExceeded(boolean attemptsExceeded) {
 		this.attemptsExceeded = attemptsExceeded;
 	}
-	
-	
 
 }

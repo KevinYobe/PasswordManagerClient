@@ -4,33 +4,34 @@ import java.time.ZonedDateTime;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Notification {
-	
 
 	private Long id;
-	
 
 	private Long userId;
-	
+
 	private String message;
-	
-	private String from; 
-	
+
+	private String from;
+
 	private String destination;
-	
+
 	private String type;
-	
+
 	private String status;
-	
+
 	private ZonedDateTime created;
-	
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime deleted;
-	
+
 	public Notification() {
-		
+
 	}
 
 	public Long getId() {
@@ -112,6 +113,5 @@ public class Notification {
 	public void setDeleted(ZonedDateTime deleted) {
 		this.deleted = deleted;
 	}
-	
 
 }

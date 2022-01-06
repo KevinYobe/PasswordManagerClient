@@ -4,25 +4,28 @@ import java.time.ZonedDateTime;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Password extends Object {
-	
+
 	private Long id;
-	
+
 	private String resource;
-	
+
 	private String url;
-	
-	private String username; 
-	
+
+	private String username;
+
 	private String password;
-	
+
 	private ZonedDateTime created;
-	
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime deleted;
-	
+
 	public Password() {
 		// TODO Auto-generated constructor stub
 	}
@@ -90,9 +93,5 @@ public class Password extends Object {
 	public void setDeleted(ZonedDateTime deleted) {
 		this.deleted = deleted;
 	}
-	
-	
-	
-
 
 }
