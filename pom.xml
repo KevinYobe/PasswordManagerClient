@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.passwordmanager</groupId>
 	<artifactId>passwordmanager-client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>passwordmanager-client</name>
 	<description>passwordstore</description>
 	<properties>
@@ -45,24 +45,20 @@
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-java8time</artifactId>
-			<version>2.1.0.RELEASE</version>
+			<version>3.0.4.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>2.5.6</version>
+			<version>2.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.6</version>
+			<version>1.2.10</version>
 		</dependency>
 
 			<dependency>
