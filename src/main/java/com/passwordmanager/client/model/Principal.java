@@ -7,8 +7,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Principal {
 	
 	private String username;
@@ -19,7 +22,7 @@ public class Principal {
 	private List<Roles> roles;
 	
 	public Principal() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getUsername() {
@@ -54,16 +57,12 @@ public class Principal {
 		this.roles = roles;
 	}
 
-	/**
-	 * @return the userId
-	 */
+	
 	public Long getUserId() {
 		return userId;
 	}
 
-	/**
-	 * @param userId the userId to set
-	 */
+	
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}

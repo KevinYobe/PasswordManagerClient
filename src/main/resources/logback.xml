@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOGS" value="logs" />
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%yellow([%d{yyyy-MM-dd HH:mm:ss.SSS}]) %highlight(%-5level) %magenta([%-15.15thread])
+                %cyan(%30.30(%logger{25}))- %msg%n
+            </pattern>
+		</encoder>
+	</appender>
+
+	<appender name="RollingFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS}/passwordmanager-client.log</file>
+		<encoder>
+		<pattern>%yellow([%d{yyyy-MM-dd HH:mm:ss.SSS}]) %highlight(%-5level) %magenta([%-15.15thread])
+                %cyan(%30.30(%logger{25}))- %msg%n
+            </pattern>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOGS}/backup/passwordmanager-client_%d{yyyy-MM-dd}_%i.zip
+			</FileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>1KB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="RollingFile" />
+	</root>
+</configuration>

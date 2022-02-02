@@ -1,53 +1,28 @@
 package com.passwordmanager.client.controller;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriBuilder;
-
-import com.passwordmanager.client.model.Principal;
-
-import passwordmanager.client.rest.LoginRestClient;
-import passwordmanager.client.rest.RolesRestClient;
 
 @Controller
 public class LoginController {
 
-	@Value("${login.baseurl}")
-	String loginURL;
+	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
-	@Value("${role.baseurl}")
-	String rolesUrl;
-
-	@Autowired
-	LoginRestClient loginRestClient;
-	
-	@Autowired
-	RolesRestClient rolesRestClient;
-	
-	@Autowired
-	Principal principal;
-	
-	UriBuilder uriBuilder;
-	
-	@PostConstruct
-	public void init() {
-	}
-
 	@GetMapping("/login")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
+		logger.info("Login request - rendering view");
 		mav.setViewName("auth/login");
 		return mav;
 	}
-	
+
 	@GetMapping("/logout")
 	public ModelAndView logout() {
 		ModelAndView mav = new ModelAndView();
+		logger.info("Logout request - rendering view");
 		mav.setViewName("auth/login");
 		return mav;
 	}

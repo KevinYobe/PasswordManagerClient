@@ -4,20 +4,22 @@ import java.time.ZonedDateTime;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public class Roles {
-	
-	
+
 	private int id;
-	
-	private String role; 
-	
+
+	private String role;
+
 	private String description;
-	
+
 	private ZonedDateTime created;
-	
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime deleted;
 
 	public Roles() {
@@ -71,6 +73,5 @@ public class Roles {
 	public void setDeleted(ZonedDateTime deleted) {
 		this.deleted = deleted;
 	}
-	
-	
+
 }

@@ -4,83 +4,84 @@ import java.time.ZonedDateTime;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public class SystemSettings {
 
 	private Long id;
-	
+
 	private String key;
-	
-	private String value; 
-	
+
+	private String value;
+
 	private ZonedDateTime created;
-	
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime lastLogin;
-	
+
 	private ZonedDateTime deleted;
-	
-public SystemSettings() {
-	// TODO Auto-generated constructor stub
-}
 
-public Long getId() {
-	return id;
-}
+	public SystemSettings() {
+		// TODO Auto-generated constructor stub
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	public Long getId() {
+		return id;
+	}
 
-public String getKey() {
-	return key;
-}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-public void setKey(String key) {
-	this.key = key;
-}
+	public String getKey() {
+		return key;
+	}
 
-public String getValue() {
-	return value;
-}
+	public void setKey(String key) {
+		this.key = key;
+	}
 
-public void setValue(String value) {
-	this.value = value;
-}
+	public String getValue() {
+		return value;
+	}
 
-public ZonedDateTime getCreated() {
-	return created;
-}
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-public void setCreated(ZonedDateTime created) {
-	this.created = created;
-}
+	public ZonedDateTime getCreated() {
+		return created;
+	}
 
-public ZonedDateTime getUpdated() {
-	return updated;
-}
+	public void setCreated(ZonedDateTime created) {
+		this.created = created;
+	}
 
-public void setUpdated(ZonedDateTime updated) {
-	this.updated = updated;
-}
+	public ZonedDateTime getUpdated() {
+		return updated;
+	}
 
-public ZonedDateTime getLastLogin() {
-	return lastLogin;
-}
+	public void setUpdated(ZonedDateTime updated) {
+		this.updated = updated;
+	}
 
-public void setLastLogin(ZonedDateTime lastLogin) {
-	this.lastLogin = lastLogin;
-}
+	public ZonedDateTime getLastLogin() {
+		return lastLogin;
+	}
 
-public ZonedDateTime getDeleted() {
-	return deleted;
-}
+	public void setLastLogin(ZonedDateTime lastLogin) {
+		this.lastLogin = lastLogin;
+	}
 
-public void setDeleted(ZonedDateTime deleted) {
-	this.deleted = deleted;
-}
+	public ZonedDateTime getDeleted() {
+		return deleted;
+	}
 
-
+	public void setDeleted(ZonedDateTime deleted) {
+		this.deleted = deleted;
+	}
 
 }

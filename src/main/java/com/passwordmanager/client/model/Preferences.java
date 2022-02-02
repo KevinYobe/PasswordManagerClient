@@ -4,21 +4,24 @@ import java.time.ZonedDateTime;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Preferences {
 
 	private Long id;
-	
+
 	private String key;
-	
-	private String value; 
-	
+
+	private String value;
+
 	private ZonedDateTime created;
-	
+
 	private ZonedDateTime updated;
-	
+
 	private ZonedDateTime deleted;
-	
+
 	public Preferences() {
 		// TODO Auto-generated constructor stub
 	}
@@ -30,7 +33,6 @@ public class Preferences {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getKey() {
 		return key;
@@ -71,7 +73,5 @@ public class Preferences {
 	public void setDeleted(ZonedDateTime deleted) {
 		this.deleted = deleted;
 	}
-	
-	
 
 }

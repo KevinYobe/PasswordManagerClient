@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				
 				.authorizeRequests()
-				.antMatchers("/login","/login/authenticate").permitAll()
+				.antMatchers("/login", "/createaccount", "/confirmtoken/**", "/setpassword").permitAll()
 				.antMatchers("/viewpassword", "/savePassword", "/addPassword", "/showeditpassword", "/editPassword", "/preferences").authenticated()
 				.antMatchers("audit", "/showUser", "/addUser", "/removeUser").hasAuthority("ROLE_ADMIN")
 				.anyRequest().authenticated()
@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    public void configure(WebSecurity web) {
 	        web.ignoring()
 	            .antMatchers("/css/**", "/js/**", "/images/**");
+	        
 	    }
 	
 }
