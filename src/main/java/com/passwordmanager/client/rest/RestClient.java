@@ -6,14 +6,13 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface RestClient {
+public interface RestClient<T> {
 	
-	public List<?> getAll(URI url);
+	public List<?> getAll(URI uri, Class<T[]> type);
+
+	public T get(URI uri, Class<T> type);
 	
-	public Object get(URI url);
-	
-	public Object post(URI url,Object obj);
-	
-	public List<?>  postAll(URI url, List<?> items);
+	public <T> T post(URI uri, T obj, Class<T> type);
+
 
 }
