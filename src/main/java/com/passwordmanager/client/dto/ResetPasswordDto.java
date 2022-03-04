@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResetPasswordDto {
 	
-	private String password; 
+	private String password;
 	private String token;
 	private Long userId;
 	

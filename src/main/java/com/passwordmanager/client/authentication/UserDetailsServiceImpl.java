@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.passwordmanager.client.rest.RestClientImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.passwordmanager.client.model.Principal;
 import com.passwordmanager.client.model.Roles;
-import com.passwordmanager.client.rest.LoginRestClient;
 
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
-	private LoginRestClient loginRestClient;
+	private RestClientImpl<Principal> 	restClient;
 	
 	@Autowired
 	ObjectMapper objectMapper;
@@ -66,7 +66,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private Principal getUserPrincipal(String username) throws JsonProcessingException {
 		uri =UriComponentsBuilder.fromUriString(loginUrl).path("/getuser/" +username).build().toUri();
 		logger.debug("Sending request for authentication for " + username);
-		Principal principal = loginRestClient.getPrincipal(uri);
+		Principal principal = restClient.get(uri, Principal.class);
 		logger.debug("Received principal from remote" + objectMapper.writeValueAsString(principal));
 		return principal;
 		

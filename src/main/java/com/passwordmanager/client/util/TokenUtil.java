@@ -6,13 +6,13 @@ import java.util.UUID;
 
 import java.net.URI;
 
+import com.passwordmanager.client.rest.RestClientImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.passwordmanager.client.model.Token;
-import com.passwordmanager.client.rest.TokenRestClient;
 
 @Component
 public class TokenUtil {
@@ -21,7 +21,7 @@ public class TokenUtil {
 	private String tokenUrl;
 	
 	@Autowired
-	private TokenRestClient tokenRestClient;
+	private RestClientImpl<Token> tokenRestClient;
 	
 	private URI uri;
 	
@@ -36,7 +36,7 @@ public class TokenUtil {
 		token.setToken(generateToken());
 		token.setType(type);
 		token.setUserId(userId);
-		tokenRestClient.post(uri, token);
+		tokenRestClient.post(uri, token, Token.class);
 		return token;
 	}
 	

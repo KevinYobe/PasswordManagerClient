@@ -4,6 +4,7 @@ import java.net.URI;
 
 import javax.servlet.http.HttpSession;
 
+import com.passwordmanager.client.rest.RestClientImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.passwordmanager.client.dto.ResetPasswordDto;
 import com.passwordmanager.client.model.Token;
-import com.passwordmanager.client.rest.TokenRestClient;
 
 @Controller
 public class TokenController {
 
 	@Autowired
-	private TokenRestClient tokenRestClient;
+	private RestClientImpl<Token> restClient;
 
 	@Value("${token.baseurl}")
 	private String tokenUrl;
@@ -48,7 +48,7 @@ public class TokenController {
 
 		uri = UriComponentsBuilder.fromUriString(tokenUrl).path("/findbyToken/{token}").build(token);
 		logger.info("Sending request to confirm token" + token);
-		Token savedToken = tokenRestClient.get(uri);
+		Token savedToken = restClient.get(uri, Token.class);
 		if (savedToken != null) {
 			message = "Email verified, please proceed to login";
 			logger.info("Received token from remote" + objectMapper.writeValueAsString(savedToken));
@@ -63,31 +63,6 @@ public class TokenController {
 			mav.addObject("message", message);
 			mav.setViewName("redirect:/login");
 		}
-		return mav;
-	}
-
-	@PostMapping("/setpassword")
-	public ModelAndView setPassword(ResetPasswordDto passwordDto, HttpSession session) throws JsonProcessingException {
-		Token token = (Token) session.getAttribute("token");
-
-		passwordDto.setToken(token.getToken());
-		passwordDto.setUserId(token.getUserId());
-		logger.info("Sending request to remote to reset password" + objectMapper.writeValueAsString(passwordDto));
-		uri = UriComponentsBuilder.fromUriString(tokenUrl).path("/createlogin").build().toUri();
-		Token createdToken = tokenRestClient.post(uri, passwordDto);
-
-		if (createdToken != null) {
-			message = "Account Created, please proceed to login";
-			mav.addObject(message);
-			mav.setViewName("/auth/login");
-			logger.info("Password reset was successfull" + objectMapper.writeValueAsString(createdToken));
-		} else {
-			message = "Failed to set pasword please contact support";
-			logger.error(message);
-			mav.addObject(message);
-			mav.setViewName("/auth/login");
-		}
-
 		return mav;
 	}
 
