@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="dashboard/head :: head" />
 <body>
-	<div class="container-fluid">
+<section class="d-flex justify-content-center align-items-start vh-100 py-5 px-3 px-md-0">
+	<div class="d-flex flex-column w-100 align-items-center">
 		<div class="row">
 			<div th:replace="dashboard/navbar :: header" /></div>
 			<div th:replace="dashboard/sidebar :: aside" /></div>
@@ -102,6 +103,6 @@
 	    document.getElementById('fieldSet').disabled = !this.checked;
 	};
 	</script>
-
+</section>
 </body>
 </html>

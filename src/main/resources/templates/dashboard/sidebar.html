@@ -2,49 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="dashboad/head :: head"></head>
 <body>
-		<aside>
-		<nav id="sidebarMenu"
-				class="col-md-3 col-lg-2 d-md-block shadow sidebar collapse">
-				<ul class="list-unstyled ps-0">
-      <li class="mb-1">
-      
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-          Password
-        </button>
-        <div class="collapse" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded" th:href="@{/viewpassword}">View Passwords</a></li>
-            <li><a href="#" class="link-dark rounded" th:href="@{/addpassword}">Add Password</a></li>
-          </ul>
+<!-- Page Aside-->
+<aside class="aside bg-dark-700">
+  <div class="simplebar-wrapper">
+    <div data-pixr-simplebar>
+      <div class="pb-6 pb-sm-0 position-relative">
+
+        <!-- Mobile close btn-->
+        <div class="cursor-pointer close-menu me-4 text-primary-hover transition-color disable-child-pointer position-absolute end-0 top-0 mt-3 pt-1 d-xl-none">
+          <i class="ri-close-circle-line ri-lg align-middle me-n2"></i>
         </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle sidebar-link align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          Users
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded" th:href="@{/adduser}">Add User</a></li>
-            <li><a href="#" class="link-dark rounded" th:href="@{/showuser}">Show User</a></li>
-            <li><a href="#" class="link-dark rounded" th:href="@{/removeuser}">Remove User</a></li>
-          </ul>
+        <!-- / Mobile close btn-->
+
+        <!-- Mobile Logo-->
+        <div class="d-flex justify-content-center align-items-center py-3">
+          <a class="m-0" href="./index.html">
+            <div class="d-flex align-items-center justify-content-center">
+              <polygon points="228.38 33.94 0 262.32 0 0 119.61 0 119.61 43.01 101.9 60.73 86.02 76.61 86.02 33.6 33.6 33.6 33.6 181.2 214.46 0.34 390.66 0.34 242.09 148.91 218.73 124.76 309.55 33.94 228.38 33.94" fill="currentColor"/><polygon points="398.39 353.81 217.51 353.81 131.04 261.75 45.09 353.81 0 353.81 0 353.49 131.26 212.91 232.05 320.21 317.27 320.21 170.28 173.21 194.19 149.29 194.19 149.55 254.9 210.51 254.97 210.39 398.39" fill="currentColor"/>
+              <span class="fw-bold fs-3 text-white">PasswordManager</span>
+            </div>                    </a>
         </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a th:href="@{/account}" class="link-dark rounded">Profile</a></li>
-            <li><a th:href="@{/settings}" class="link-dark rounded">Settings</a></li>
-            <li><a th:href="@{/logout}" class="link-dark rounded">Sign out</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-			</nav>
-			
-		</aside>
+
+        <ul class="list-unstyled mb-6 aside-menu">
+
+          <!-- UI Kit Menu Section-->
+          <li class="menu-section mt-5">Passwords</li>
+            <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-home-4-line me-3"></i> <span>View Passwords</span></a>
+          </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</aside>    <!-- / Page Aside-->
 </body>
 </html>

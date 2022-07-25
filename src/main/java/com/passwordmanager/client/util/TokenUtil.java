@@ -18,14 +18,14 @@ import com.passwordmanager.client.model.Token;
 public class TokenUtil {
 	
 	@Value("${token.baseurl}")
-	private String tokenUrl;
+	private static String tokenUrl;
 	
 	@Autowired
-	private RestClientImpl<Token> tokenRestClient;
+	private static RestClientImpl<Token> tokenRestClient;
 	
-	private URI uri;
+	private static URI uri;
 	
-	public Token createToken(String type, Long userId) {
+	public static Token createToken(String type, Long userId) {
 		uri = UriComponentsBuilder.fromUriString(tokenUrl).path("/save").build().toUri();
 		Token token = new Token();
 		token.setCreated(ZonedDateTime.now());
@@ -40,7 +40,7 @@ public class TokenUtil {
 		return token;
 	}
 	
-	private String generateToken() {
+	private static String generateToken() {
 		return UUID.randomUUID().toString();
 	}
 

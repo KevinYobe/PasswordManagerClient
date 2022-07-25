@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.passwordmanager.client.dto.ResetPasswordDto;
 import com.passwordmanager.client.model.Login;
+import com.passwordmanager.client.model.OTP;
 import com.passwordmanager.client.model.Token;
 import com.passwordmanager.client.rest.RestClientImpl;
 import org.slf4j.Logger;
@@ -41,9 +42,8 @@ public class ResetPasswordController {
     private final Logger logger = LoggerFactory.getLogger(TokenController.class);
     @PostMapping("/setpassword")
     public ModelAndView setPassword(ResetPasswordDto passwordDto, HttpSession session) throws JsonProcessingException {
-        Token token = (Token) session.getAttribute("token");
-        passwordDto.setToken(token.getToken());
-        passwordDto.setUserId(token.getUserId());
+        OTP otp = (OTP) session.getAttribute("otp");
+        passwordDto.setUserId(otp.getUserId());
         logger.info("Sending request to remote to reset password" + objectMapper.writeValueAsString(passwordDto));
         uri = UriComponentsBuilder.fromUriString(tokenUrl).path("/resetpassword/{userId}/{username}").build(passwordDto.getUserId(), passwordDto.getPassword());
         logger.info(uri.toString());
@@ -55,7 +55,7 @@ public class ResetPasswordController {
             mav.setViewName("/auth/login");
             logger.info("Password reset was successfull" + objectMapper.writeValueAsString(login));
         } else {
-            message = "Failed to set pasword please contact support";
+            message = "Failed to set password, please contact support";
             logger.error(message);
             mav.addObject(message);
             mav.setViewName("/auth/login");

@@ -1,93 +1,126 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-<link rel="stylesheet" th:href="@{/css/dashboard.css}">
-<link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-<link rel="preconnect" th:href="@{https://fonts.gstatic.com}"
-	crossorigin>
-<link
-	th:href="@{https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;1,200&family=Raleway:ital,wght@1,200&family=Roboto:wght@100&family=Scope+One&display=swap}"
-	rel="stylesheet">
+    <!-- Page Meta Tags-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{images/favicon/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{images/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/favicon/favicon-16x16.png}">
+    <link rel="mask-icon" th:href="@{images/favicon/safari-pinned-tab.svg}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
-<title>Password Manager</title>
+    <!-- Google Font-->
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Overpass:wght@200;300;400;600&display=swap}" rel="stylesheet">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" th:href="@{css/libs.bundle.css}" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" th:href="@{css/theme.bundle.css}" />
+
+    <!-- Fix for custom scrollbar if JS is disabled-->
+    <noscript>
+        <style>
+          /**
+          * Reinstate scrolling for non-JS clients
+          */
+          .simplebar-content-wrapper {
+            overflow: auto;
+          }
+        </style>
+    </noscript>
+
+    <!-- Page Title -->
+    <title>Secure PasswordManager</title>
+
 </head>
 <body>
-	<div class="container-fluid">
-		<main>
-			<form class="form-group" method="POST" th:action="@{/login}">
 
-				<div class="shadow card main">
-					<div>
-						<h1 class="h3 mb-3 font-weight-normal text-center">Secure
-							Password Manager</h1>
-					</div>
-					<div class="card-body">
-						<div th:if="${param.error}">
-							<div class="alert alert-danger alert-dismissible fade show"
-								role="alert">
-								Invalid username or password.
-								<button type="button" class="close" data-dismiss="alert"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
+<!-- Main Section-->
+<section class="d-flex justify-content-center align-items-start vh-100 py-5 px-3 px-md-0">
+    <div class="d-flex flex-column w-100 align-items-center">
+    <div th:if="${param.error}">
+        <div class="alert alert-danger alert-dismissible fade show"
+             role="alert">
+            Invalid username or password.
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <!-- Login Form-->
+        <!-- Logo-->
+        <a href="#" class="d-table mt-5 mb-4 mx-auto">
+            <div class="d-flex align-items-center justify-content-center">
+                <svg class="f-w-6 me-2 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 398.39 353.81"><polygon points="228.38 33.94 0 262.32 0 0 119.61 0 119.61 43.01 101.9 60.73 86.02 76.61 86.02 33.6 33.6 33.6 33.6 181.2 214.46 0.34 390.66 0.34 242.09 148.91 218.73 124.76 309.55 33.94 228.38 33.94" fill="currentColor"/><polygon points="398.39 353.81 217.51 353.81 131.04 261.75 45.09 353.81 0 353.81 0 353.49 131.26 212.91 232.05 320.21 317.27 320.21 170.28 173.21 194.19 149.29 194.19 149.55 254.9 210.51 254.97 210.39 398.39 353.81" fill="currentColor"/></svg>
+                <span class="fw-bold fs-3 text-white">Kavlan</span>
+            </div>      </a>
+        <!-- Logo-->
 
-						</div>
-						
-						<div th:if="${message}==null">
-							<div class="alert alert-danger alert-dismissible fade show"
-								role="alert">
-								Failed to authenticate token
-								<button type="button" class="close" data-dismiss="alert"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
+        <div class="shadow-lg rounded p-4 p-sm-5 bg-white form">
+            <h5 class="fw-bold text-muted">Login</h5>
+            <p class="text-muted">Welcome back!</p>
 
-						</div>
+            <!-- Login Form-->
+            <form class="mt-4" method="POST" th:action="@{/login}">
+                <div class="form-group">
+                    <label class="form-label form-label-light" for="inputEmail">Email address</label>
+                    <input type="email" class="form-control form-control-light" id="inputEmail"
+                           th:name="username" required autofocus placeholder="Enter your email"/>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="form-label form-label-light d-flex justify-content-between align-items-center">
+                        Password
+                        <a th:href="@{/createaccount}" class="text-muted small ms-2 text-decoration-underline">Forgot
+                            password?</a>
+                    </label>
+                    <input type="password" class="form-control form-control-light"id="inputPassword"
+                           placeholder="Password" th:name="password" required/>
+                </div>
+                <button class="btn btn-primary d-block w-100 my-4" type="submit">Sign
+                    in</button>
 
-						<input type="email" id="inputEmail" class="form-control"
-							th:name="username" placeholder="Email address" required autofocus>
-						<input type="password" id="inputPassword" class="form-control"
-							placeholder="Password" th:name="password" required>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value=""
-								id="defaultCheck1"> <label class="form-check-label"
-								for="defaultCheck1">Remember Me</label>
-						</div>
-						<button class="btn btn-primary btn-lg w-100" type="submit">Sign
-							in</button>
-						<p class="mt-3">
-							Don't have an account? <a th:href="@{/createaccount}">Create
-								account</a>
-						</p>
-
-						<p class="mt-5 mb-3 text-muted text-center">&copy; 2021
-							Concept Solutions</p>
-					</div>
-				</div>
-			</form>
+                <p class="d-block text-center text-muted small">New customer? <a class=" text-decoration-underline"
+                                                                                 th:href="@{/createaccount}">Sign up for an account</a></p>
+            </form>
+            <!-- / Login Form -->
 
 
-		</main>
-	</div>
-	<script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+        </div>
+    </div>
+    <!-- / Login Form-->
+
+</section>
+<!-- / Main Section-->
+
+<!-- Theme JS -->
+<!-- Vendor JS -->
+<script th:src="@{js/vendor.bundle.js}"></script>
+
+<!-- Theme JS -->
+<script src="@{js/theme.bundle.js}"></script>
+
+<script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script
+        th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script
+        th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

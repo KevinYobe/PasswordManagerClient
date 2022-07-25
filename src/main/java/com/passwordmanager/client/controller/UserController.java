@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import com.passwordmanager.client.dto.ResetPasswordDto;
+import com.passwordmanager.client.model.OTP;
 import com.passwordmanager.client.rest.RestClientImpl;
+import com.passwordmanager.client.util.OTPUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -38,6 +38,9 @@ public class UserController {
 	@Autowired
 	private Messenger messenger;
 
+	@Autowired
+	OTPUtil otpUtil;
+
 	private ModelAndView mav = new ModelAndView();
 
 	private URI uri;
@@ -54,16 +57,6 @@ public class UserController {
 	private final Logger logger = LoggerFactory.getLogger(TokenController.class);
 
 	public UserController() {
-	}
-
-	@ModelAttribute("users")
-	public List<User> getAllUsers() throws JsonProcessingException {
-		logger.info("Sending request to get all users");
-		uri = UriComponentsBuilder.fromUriString(userUrl).path("/getAllUsers").build().toUri();
-		List<User> users = restClient.getAll(uri,User[].class);
-		logger.info("Received users from remote" + objectMapper.writeValueAsString(users));
-		return users;
-
 	}
 
 	@GetMapping("/showuser")
@@ -120,16 +113,17 @@ public class UserController {
 		return mav;
 	}
 
-
 	@PostMapping("/createaccount")
-	public ModelAndView createAccount(User user) throws JsonProcessingException {
+	public ModelAndView createAccount(User user, HttpSession session) throws JsonProcessingException {
 		logger.info("Sending request to create account: " + objectMapper.writeValueAsString(user));
 		uri = UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();
 		User savedUser = restClient.post(uri, user, User.class);
 		if (savedUser != null) {
-			Token token = createToken("USER_REGISTRATION", savedUser.getId());
-			String message = "Welcome to secure password manager. Click on the link to login.   "
-					+ "http://localhost:8080/confirmtoken/" + token.getToken();
+			OTP otp = otpUtil.createOTP(savedUser.getId());
+			session.setAttribute("user", savedUser);
+			session.setAttribute("otp", otp);
+			String message = "Welcome to secure password manager. Please find your otp below:   " + "\n"
+					+ otp.getOTP();
 			Notification notification = new Notification();
 			notification.setCreated(ZonedDateTime.now());
 			notification.setDeleted(null);
@@ -140,10 +134,29 @@ public class UserController {
 			sendConfirmationEmail(notification);
 			logger.info("Account created succesfully, password link sent");
 		}
-		mav.setViewName("redirect:/login");
+
+
+		mav.setViewName("auth/verifyemail");
 		return mav;
 	}
-
+	@PostMapping ("/confirm")
+	public ModelAndView confirmOTP(@RequestParam("otp") String otp, HttpSession session){
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getId());
+		OTP userOtp = otpUtil.confirmOTP(otp, user.getId());
+		System.out.println(userOtp.getOTP());
+		if(userOtp!=null){
+			String message = "Email verified, please set your password";
+			mav.addObject(message);
+			mav.setViewName("/user/setpassword");
+		}
+		else{
+			String message = "Failed to verify token, token may have expired";
+			mav.addObject(message);
+			mav.setViewName("redirect:/confirm");
+		}
+		return mav;
+	}
 	@ModelAttribute("user")
 	public User getUser() {
 		return new User();
@@ -152,6 +165,10 @@ public class UserController {
 	protected Token createToken(String type, Long userId) {
 		return tokenUtil.createToken(type, userId);
 
+	}
+	@ModelAttribute("passwordDto")
+	public ResetPasswordDto resetPasswordDto() {
+		return new ResetPasswordDto();
 	}
 
 	protected void sendConfirmationEmail(Notification notification) {
