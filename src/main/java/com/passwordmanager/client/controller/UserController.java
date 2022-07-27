@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.passwordmanager.client.dto.ResetPasswordDto;
-import com.passwordmanager.client.model.OTP;
+import com.passwordmanager.client.model.*;
 import com.passwordmanager.client.rest.RestClientImpl;
 import com.passwordmanager.client.util.OTPUtil;
 import org.slf4j.Logger;
@@ -17,15 +17,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.passwordmanager.client.model.Notification;
-import com.passwordmanager.client.model.Token;
-import com.passwordmanager.client.model.User;
 import com.passwordmanager.client.notification.Messenger;
 import com.passwordmanager.client.util.TokenUtil;
 
@@ -88,21 +88,6 @@ public class UserController {
 		return mav;
 	}
 
-	@GetMapping("/adduser")
-	public ModelAndView addUser() {
-		mav.setViewName("/user/createuser");
-		return mav;
-	}
-
-	@PostMapping("/adduser")
-	public ModelAndView addUser(User user) throws JsonProcessingException {
-		logger.info("Sending request to add user: " + objectMapper.writeValueAsString(user));
-		uri = UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();
-		restClient.post(uri, user, User.class);
-		mav.setViewName("redirect:/showuser");
-		return mav;
-	}
-
 	@GetMapping("/removeuser/{id}")
 	public ModelAndView removeUser(@PathVariable Long id) throws JsonProcessingException {
 		logger.info("Sending request to remove user with id: " + id);
@@ -114,7 +99,7 @@ public class UserController {
 	}
 
 	@PostMapping("/createaccount")
-	public ModelAndView createAccount(User user, HttpSession session) throws JsonProcessingException {
+	public ModelAndView createAccount(User user, BindingResult bindingResult, HttpSession session) throws JsonProcessingException {
 		logger.info("Sending request to create account: " + objectMapper.writeValueAsString(user));
 		uri = UriComponentsBuilder.fromUriString(userUrl).path("/save").build().toUri();
 		User savedUser = restClient.post(uri, user, User.class);
@@ -133,27 +118,47 @@ public class UserController {
 			notification.setUserId(savedUser.getId());
 			sendConfirmationEmail(notification);
 			logger.info("Account created succesfully, password link sent");
+			mav.addObject("message", "Account created");
+			mav.setViewName("auth/verifyemail");
+		} else{
+			mav.addObject("message","Failed to create account, please check your details");
+			mav.setViewName("user/createaccount");
 		}
+		return mav;
+	}
 
-
-		mav.setViewName("auth/verifyemail");
+	@PostMapping("/resetpassword")
+	public ModelAndView resetUserPassword(String email, HttpSession session){
+		String message = "";
+		uri =UriComponentsBuilder.fromUriString(userUrl).path("/finduserbyusername/{username}").build(email);
+		User user = restClient.get(uri, User.class);
+		if(user==null){
+			message="The email entered is not linked to any account, please try again";
+			mav.addObject("message",message);
+			mav.setViewName("auth/resetpassword");
+		}
+		else{
+			OTP otp = otpUtil.createOTP(user.getId());
+			session.setAttribute("user", user);
+			session.setAttribute("otp", otp);
+			mav.addObject("message",message);
+			mav.setViewName("auth/verifyemail");
+		}
 		return mav;
 	}
 	@PostMapping ("/confirm")
 	public ModelAndView confirmOTP(@RequestParam("otp") String otp, HttpSession session){
 		User user = (User) session.getAttribute("user");
-		System.out.println(user.getId());
 		OTP userOtp = otpUtil.confirmOTP(otp, user.getId());
-		System.out.println(userOtp.getOTP());
 		if(userOtp!=null){
 			String message = "Email verified, please set your password";
 			mav.addObject(message);
 			mav.setViewName("/user/setpassword");
 		}
 		else{
-			String message = "Failed to verify token, token may have expired";
+			String message = "Failed to verify otp, otp may have expired";
 			mav.addObject(message);
-			mav.setViewName("redirect:/confirm");
+			mav.setViewName("auth/verifyemail");
 		}
 		return mav;
 	}

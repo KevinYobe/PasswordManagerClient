@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 import com.passwordmanager.client.dto.ErrorDto;
 import com.passwordmanager.client.rest.RestClient;
@@ -32,10 +33,8 @@ public class PasswordController extends AbstractWebController {
 	@Value("${password.baseurl}")
 	private String passwordUrl;
 
-	@Autowired
 	RestClient<Password> restClient;
 
-	@Autowired
 	private Password userPassword;
 
 	private ModelAndView mav = new ModelAndView();
@@ -44,11 +43,27 @@ public class PasswordController extends AbstractWebController {
 	
 	private final Logger logger = LoggerFactory.getLogger(PasswordController.class);
 
-	@Autowired
 	ErrorDto errorDto;
 
-	@Autowired 
 	private ObjectMapper objectMapper;
+
+	@Autowired
+	public void setRestClient(RestClient<Password> restClient) {
+		this.restClient = restClient;
+	}
+	@Autowired
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
+	@Autowired
+	public void setUserPassword(Password userPassword) {
+		this.userPassword = userPassword;
+	}
+
+	@Autowired
+	public void setErrorDto(ErrorDto errorDto) {
+		this.errorDto = errorDto;
+	}
 
 	@GetMapping("/addpassword")
 	public ModelAndView addPassoword() {
@@ -99,9 +114,9 @@ public class PasswordController extends AbstractWebController {
 		return new Password();
 	}
 
-	@GetMapping("/showeditpassword/{id}")
-	public ModelAndView getPassword(@PathVariable("id") Long id, Password userPassword) {
-		uri = UriComponentsBuilder.fromUriString(passwordUrl).path("/getPassword/{id}").build(id);
+	@GetMapping("/showeditpassword")
+	public ModelAndView getPassword(Password userPassword) {
+		uri = UriComponentsBuilder.fromUriString(passwordUrl).path("/getPassword/{id}").build(4);
 		Password password = restClient.get(uri, Password.class);
 		mav.addObject(password);
 		mav.setViewName("password/editpassword");

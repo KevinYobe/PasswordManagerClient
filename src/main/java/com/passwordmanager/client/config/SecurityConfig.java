@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				
 				.authorizeRequests()
-				.antMatchers("/login", "/createaccount", "/confirmtoken/**", "/setpassword", "/confirm/**").permitAll()
+				.antMatchers("/login", "/createaccount", "/confirmtoken/**", "/setpassword", "/confirm/**", "/resetpassword").permitAll()
 				.antMatchers("/viewpassword", "/savePassword", "/addPassword", "/showeditpassword", "/editPassword", "/preferences").authenticated()
 				.antMatchers("audit", "/showUser", "/addUser", "/removeUser").hasAuthority("ROLE_ADMIN")
 				.anyRequest().authenticated()

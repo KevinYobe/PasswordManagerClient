@@ -7,13 +7,11 @@
   <div class="simplebar-wrapper">
     <div data-pixr-simplebar>
       <div class="pb-6 pb-sm-0 position-relative">
-
         <!-- Mobile close btn-->
         <div class="cursor-pointer close-menu me-4 text-primary-hover transition-color disable-child-pointer position-absolute end-0 top-0 mt-3 pt-1 d-xl-none">
           <i class="ri-close-circle-line ri-lg align-middle me-n2"></i>
         </div>
         <!-- / Mobile close btn-->
-
         <!-- Mobile Logo-->
         <div class="d-flex justify-content-center align-items-center py-3">
           <a class="m-0" href="./index.html">
@@ -23,12 +21,19 @@
         </div>
 
         <ul class="list-unstyled mb-6 aside-menu">
-
           <!-- UI Kit Menu Section-->
           <li class="menu-section mt-5">Passwords</li>
             <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-home-4-line me-3"></i> <span>View Passwords</span></a>
           </a>
           </li>
+
+          <li class="menu-section mt-5">Account</li>
+          <a class="d-flex align-items-center menu-link" th:href="@{/account}"><i class="ri-home-4-line me-3"></i> <span>View Account</span></a>
+          </a>
+
+          <li class="menu-section mt-5">Settings</li>
+          <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-home-4-line me-3"></i> <span>Manage User Settings</span></a>
+          </a>
 
         </ul>
       </div>

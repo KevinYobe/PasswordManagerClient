@@ -23,23 +23,22 @@ import com.passwordmanager.client.dto.ResetPasswordDto;
 
 @Controller
 public class TokenController {
-
-	@Autowired
 	private RestClientImpl<OTP> restClient;
-
 	@Value("${token.baseurl}")
 	private String tokenUrl;
-
 	private ModelAndView mav = new ModelAndView();
-
 	private URI uri;
-
 	private final Logger logger = LoggerFactory.getLogger(TokenController.class);
-
 	String message = "";
-
-	@Autowired
 	private ObjectMapper objectMapper;
+	@Autowired
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
+	@Autowired
+	public void setRestClient(RestClientImpl<OTP> restClient) {
+		this.restClient = restClient;
+	}
 
 	@GetMapping("/confirmtoken/{token}")
 	public ModelAndView confirmToken(@PathVariable("otp") OTP otp, HttpSession session)
