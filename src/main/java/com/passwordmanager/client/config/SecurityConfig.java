@@ -43,9 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("audit", "/showUser", "/addUser", "/removeUser").hasAuthority("ROLE_ADMIN")
 				.anyRequest().authenticated()
 				.and()
-			
-		
-			.formLogin()
+
+				.formLogin()
 				.loginPage("/login")
 				.permitAll()
 				.defaultSuccessUrl("/viewpassword")
@@ -53,7 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 				.logoutUrl("/logout")
 				.permitAll();
-				
 	}
 	
 	 @Override
