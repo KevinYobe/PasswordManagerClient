@@ -1,0 +1,12 @@
+default:
+  image: ubuntu
+stages:
+  - test
+  - build
+  - deploy
+test-job:
+  stage: test
+  script: "mvn clean verify"
+build-job:
+  stage: build
+  script: "mvn clean install"
