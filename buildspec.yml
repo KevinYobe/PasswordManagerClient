@@ -17,4 +17,4 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - target/passwordmanager-client 1.0.0-SNAPSHOT.jar
+    - target/passwordmanager-client-1.0.0-SNAPSHOT.jar
