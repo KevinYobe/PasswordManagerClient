@@ -1,0 +1,29 @@
+.btn-primary{
+    background-color: #001f3f;
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.login{
+    height: 45%;
+    width: 45%;
+    color: #001f3f;
+}
+.d-md-flex{
+    display: flex !important;
+}
+.text-md-right {
+    text-align: right !important;
+}
+.create-account{
+    height: 45%;
+    width: 45%;
+    color: #001f3f;
+}
+a{
+    color: #001f3f;
+}
+
+.btn, .btn-primary{
+
+}

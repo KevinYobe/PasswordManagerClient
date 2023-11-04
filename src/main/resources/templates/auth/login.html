@@ -9,44 +9,20 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" th:href="@{images/favicon/apple-touch-icon.png}">
-    <link rel="icon" type="image/png" sizes="32x32" th:href="@{images/favicon/favicon-32x32.png}">
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{images/favicon/favicon-16x16.png}">
-    <link rel="mask-icon" th:href="@{images/favicon/safari-pinned-tab.svg}" color="#5bbad5">
+    <link rel="icon" type="image/x-icon" th:href="@{images/vault-favicon-black.png}">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-
     <!-- Google Font-->
     <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
     <link th:href="@{https://fonts.googleapis.com/css2?family=Overpass:wght@200;300;400;600&display=swap}" rel="stylesheet">
-
-    <!-- Vendor CSS -->
-    <link rel="stylesheet" th:href="@{css/libs.bundle.css}" />
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" th:href="@{css/theme.bundle.css}" />
-
-    <!-- Fix for custom scrollbar if JS is disabled-->
-    <noscript>
-        <style>
-          /**
-          * Reinstate scrolling for non-JS clients
-          */
-          .simplebar-content-wrapper {
-            overflow: auto;
-          }
-        </style>
-    </noscript>
-
-    <!-- Page Title -->
-    <title>Secure PasswordManager</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link th:href="@{css/style.css}" rel="stylesheet">
+    <title>Vault</title>
 </head>
 <body>
-<!-- Main Section-->
-<section class="d-flex justify-content-center align-items-start vh-100 py-5 px-3 px-md-0">
-    <div class="d-flex flex-column w-100 align-items-center">
+<section class="h-100 d-flex align-items-center justify-content-center">
+    <div class="login align-items-center">
         <div th:if="${param.error}">
             <div class="alert alert-danger alert-dismissible fade show"
              role="alert">
@@ -58,56 +34,55 @@
             </div>
         </div>
         <!-- Login Form-->
-        <!-- Logo-->
         <a href="#" class="d-table mt-5 mb-4 mx-auto">
-            <div class="d-flex align-items-center justify-content-center">
-                <span class="fw-bold fs-3 text-white">Secure PasswordManager</span>
-            </div>      </a>
+           <img th:src="@{images/vault-logo.png}" style="height: 40px"/>
+        </a>
         <!-- Logo-->
         <div class="shadow-lg rounded p-4 p-sm-5 bg-white form">
-            <h5 class="fw-bold text-muted">Login</h5>
+            <h5 class="fw-bold text-muted">LOGIN</h5>
             <!-- Login Form-->
-            <form class="mt-4" method="POST" th:action="@{/login}">
-                <div class="form-group">
-                    <label class="form-label form-label-light" for="inputEmail">Email address</label>
+            <form class="" method="POST" th:action="@{/login}">
+                <div class="form-group mb-3">
                     <input type="email" class="form-control form-control-light" id="inputEmail"
-                           th:name="username" required autofocus placeholder="Enter your email"/>
+                           th:name="username" required autofocus placeholder="Email address"/>
                 </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="form-label form-label-light d-flex justify-content-between align-items-center">
-                        Password
-                        <a th:href="@{/resetpassword}" class="text-muted small ms-2 text-decoration-underline">Forgot
-                            password?</a>
-                    </label>
+                <div class="form-group mb-3">
                     <input type="password" class="form-control form-control-light"id="inputPassword"
                            placeholder="Password" th:name="password" required/>
                 </div>
                 <button class="btn btn-primary d-block w-100 my-4" type="submit">Sign
                     in</button>
-                <p class="d-block text-center text-muted small">New customer? <a class=" text-decoration-underline"
-                                                                                 th:href="@{/createaccount}">Sign up for an account</a></p>
+                <div class="form-check form-group d-md-flex">
+                    <div class="w-50 text-left">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label text-muted small" for="flexCheckDefault">
+                            Remember me?
+                        </label>
+                    </div >
+                    <div class="w-50 text-md-right">
+                        <p class="text-muted small">New customer? <a class=" text-decoration-underline"
+                                                                     th:href="@{/createaccount}">Sign up for an account</a></p>
+                    </div>
+                </div>
+                <div class="form-group align-items-center">
+                    <p class="text-center"> <a th:href="@{/resetpassword}" class="text-muted small ms-2 text-decoration-underline">Forgot
+                        password?</a></p>
+                </div>
+
             </form>
-            <!-- / Login Form -->
         </div>
     </div>
-    <!-- / Login Form-->
-
 </section>
-
-<script th:src="@{js/vendor.bundle.js}"></script>
-
-<script th:src="@{js/theme.bundle.js}"></script>
-
 <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
 <script
-        th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
 <script
-        th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js}"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 
 </body>
