@@ -9,7 +9,6 @@ import com.passwordmanager.client.config.AppConfig;
 @Import(AppConfig.class)
 @SpringBootApplication
 public class PasswordmanagerClientApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(PasswordmanagerClientApplication.class, args);
 	}
