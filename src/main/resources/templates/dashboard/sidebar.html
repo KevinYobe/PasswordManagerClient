@@ -2,54 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="dashboad/head :: head"></head>
 <body>
-<!-- Page Aside-->
-<aside class="aside bg-dark-700">
-  <div class="simplebar-wrapper">
-    <div data-pixr-simplebar>
-      <div class="pb-6 pb-sm-0 position-relative">
-        <!-- Mobile close btn-->
-        <div class="cursor-pointer close-menu me-4 text-primary-hover transition-color disable-child-pointer position-absolute end-0 top-0 mt-3 pt-1 d-xl-none">
-          <i class="ri-close-circle-line ri-lg align-middle me-n2"></i>
+<aside class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-light shadow">
+    <div>
+        <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="sidebarMenuLabel">Passwords</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
+                        aria-label="Close"></button>
+            </div>
+            <h6
+                    class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                <span>Passwords</span>
+                <a class="link-secondary" href="#" aria-label="Add a new report">
+                    <svg class="bi">
+                        <use xlink:href="#plus-circle" />
+                    </svg>
+                </a>
+            </h6>
+            <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                            <i class="bi bi-alexa"></i>
+                            Social
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" th:href="@{/viewpassword}">
+                            <i class="bi bi-credit-card-fill"></i>
+                            Finance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" th:href="@{/viewpassword}">
+                            <i class="bi bi-pc-display"></i>
+                            Work
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" th:href="@{/viewpassword}">
+                            <i class="bi bi-incognito"></i>
+                            Personal
+                        </a>
+                    </li>
+                    <hr class="my-3">
+                    <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" th:href="@{/account}">
+                                <i class="bi bi-person-fill"></i>
+                                Account
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2" th:href="@{/account}">
+                                <i class="bi bi-gear-fill"></i>
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+            </div>
         </div>
-        <!-- / Mobile close btn-->
-        <!-- Mobile Logo-->
-        <div class="d-flex justify-content-center align-items-center py-3">
-          <a class="m-0" href="./index.html">
-            <div class="d-flex align-items-center justify-content-center">
-              <span class="fw-bold fs-3 text-white">PasswordManager</span>
-            </div></a>
-        </div>
-
-        <ul class="list-unstyled mb-6 aside-menu">
-          <!-- UI Kit Menu Section-->
-          <li class="menu-section mt-5">Passwords</li>
-            <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-facebook-box-fill me-3"></i></i> <span>Social Networking</span></a>
-          <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-lock-password-fill me-3"></i><span>Work</span></a>
-          </a>
-          </li>
-
-          <li class="menu-section mt-5">Banking & Finance</li>
-          <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-bank-card-2-line me-3"></i></i> <span>Payment Cards</span></a>
-          </a>
-          <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-bank-line me-3"></i> <span>Bank Accounts</span></a>
-          <a class="d-flex align-items-center menu-link" th:href="@{/viewpassword}"><i class="ri-smartphone-line me-3"></i></i> <span>Mobile Banking</span></a>
-          </a>
-
-          </li>
-
-          <li class="menu-section mt-5">Account</li>
-          <a class="d-flex align-items-center menu-link" th:href="@{/account}"><i class="ri-home-4-line me-3"></i> <span>View Account</span></a>
-          </a>
-
-          <li class="menu-section mt-5">Settings</li>
-          <a class="d-flex align-items-center menu-link" th:href="@{/preferences}"><i class="ri-home-4-line me-3"></i> <span>Manage User Settings</span></a>
-          </a>
-
-        </ul>
-      </div>
     </div>
-  </div>
-
-</aside>    <!-- / Page Aside-->
+</aside>
 </body>
 </html>
