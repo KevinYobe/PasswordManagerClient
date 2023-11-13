@@ -57,6 +57,11 @@ a{
 
 .navbar .form-control {
     padding: .75rem 1rem;
+
+}
+
+.form-control{
+    margin-top: 1rem;
 }
 
 .bi {
@@ -202,6 +207,8 @@ table {
 .modal-header{
     background-color: #001f3f;
     color: antiquewhite;
+    font-weight: bold;
+    font-size: small;
 }
 
 .modal-body{

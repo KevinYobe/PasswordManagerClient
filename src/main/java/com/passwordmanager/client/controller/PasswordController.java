@@ -138,8 +138,7 @@ public class PasswordController extends AbstractWebController {
 		
 		return mav;
 	}
-	
-	
+
 	@PostMapping("/editpassword")
 	public ModelAndView editPassword(Password password) throws JsonProcessingException {
 		logger.info("Sending request to remote to edit password" + objectMapper.writeValueAsString(password));
