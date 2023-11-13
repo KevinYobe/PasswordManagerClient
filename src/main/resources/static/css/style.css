@@ -1,4 +1,6 @@
-
+body{
+    background-color:#eff2f6;
+}
 .login{
     height: 45%;
     width:40%;
