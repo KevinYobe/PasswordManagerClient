@@ -65,12 +65,6 @@ public class PasswordController extends AbstractWebController {
 		this.errorDto = errorDto;
 	}
 
-	@GetMapping("/addpassword")
-	public ModelAndView addPassoword() {
-		mav.setViewName("password/addpassword");
-		return mav;
-	}
-
 	@PostMapping("/savePassword")
 	public ModelAndView savePassword(HttpServletRequest request, Password password, BindingResult bindingResult) throws JsonProcessingException {
 		
@@ -79,7 +73,7 @@ public class PasswordController extends AbstractWebController {
 		uri = UriComponentsBuilder.fromUriString(passwordUrl).path("/addPassword/{username}")
 				.build(request.getUserPrincipal().getName());
 		logger.info("Sending request to remote to save password" + objectMapper.writeValueAsString(password.toString()));
-		Password savedPassword = restClient.post(uri, userPassword, Password.class);
+		Password savedPassword = restClient.post(uri, password, Password.class);
 		if (savedPassword ==null){
 			errorDto.setErrorMessage("Failed to add password. Please contact support if this persists");
 			mav.addObject(errorDto);

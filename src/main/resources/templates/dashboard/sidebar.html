@@ -22,19 +22,30 @@
             <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" th:href="@{/viewsocialnetwork}">
                             <i class="bi bi-alexa"></i>
                             Social
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2" th:href="@{/viewpassword}">
+                    <li class="mb-1 nav-item">
+                        <button class="btn-toggle nav-link d-flex align-items-center gap-2" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                             <i class="bi bi-credit-card-fill"></i>
                             Finance
-                        </a>
+                        </button>
+                        <div class="collapse" id="home-collapse" style="">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-paypal"></i>Mobile Banking</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-credit-card"></i>Credit Cards</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-credit-card-2-front"></i>Master Card</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-credit-card-2-front"></i>VISA</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-paypal"></i>PayPal</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-globe"></i>Online Banking</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-wallet"></i>Mobile Wallets</a></li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2" th:href="@{/viewpassword}">
+                        <a class="nav-link d-flex align-items-center gap-2" th:href="@{/viewworkresource}">
                             <i class="bi bi-pc-display"></i>
                             Work
                         </a>
@@ -44,6 +55,22 @@
                             <i class="bi bi-incognito"></i>
                             Personal
                         </a>
+                    </li>
+                    <li class="mb-1 nav-item">
+                        <button class="btn-toggle nav-link d-flex align-items-center gap-2" data-bs-toggle="collapse" data-bs-target="#productivity" aria-expanded="false">
+                            <i class="bi bi-credit-card-fill"></i>
+                            Productivity
+                        </button>
+                        <div class="collapse" id="productivity" style="">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-envelope"></i>Email</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-slack"></i>Slack</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-journal-minus"></i></i>Notes</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-search"></i></i>Glassdoor</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-search"></i></i>Indeed</a></li>
+                                <li class="nav-item"><a href="#" class="d-flex nav-link gap-2 dropdown-link"><i class="bi bi-microsoft"></i>Office365</a></li>
+                            </ul>
+                        </div>
                     </li>
                     <hr class="my-3">
                     <ul class="nav flex-column mb-auto">
